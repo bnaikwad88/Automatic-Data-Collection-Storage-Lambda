@@ -10,7 +10,7 @@ In addition to fetching and storing the data, the function should also use Amazo
 Overall, the function should be able to run indefinitely and continue to fetch and store the data on a regular basis.
 
 ## Approach:
-1. Create an AWS Lambda function and configure it to be triggered by an Amazon CloudWatch Event that occurs every 15 seconds.
+1. Create an AWS Lambda function and configure it to be triggered by an Amazon CloudWatch Event that occurs every 15 seconds/ 1 minute for free tier.
 2. In the function's code, use the requests library to make a GET request to the API to fetch the data.
 3. Use a library such as psycopg2 to connect to the Amazon RDS instance and store the data in the database.
 4. Use Amazon CloudWatch to set up a monitoring alarm that will trigger when the server is unavailable.
