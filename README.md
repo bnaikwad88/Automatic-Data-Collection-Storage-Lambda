@@ -20,7 +20,7 @@ Overall, the function should be able to run indefinitely and continue to fetch a
 
 ## Expected Results:
 The result of the above approach would be an AWS Lambda function that is continuously running and performing the following tasks: 
-- Fetching data from an API on a regular basis (every 15 seconds).
+- Fetching data from an API on a regular basis (every 15 seconds/1 minute).
 - Storing the fetched data in an Amazon RDS database.
 - Monitoring the server's availability using a CloudWatch Alarm.
 - Sending a notification to a Slack channel if the server becomes unavailable.
