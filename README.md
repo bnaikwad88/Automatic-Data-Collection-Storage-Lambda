@@ -75,3 +75,7 @@ def lambda_handler(event, context):
     }
 
 ```
+![lambda-func-overview](https://github.com/bnaikwad88/Automatic-Data-Collection-Storage-Lambda/assets/116859424/441e0439-b284-4406-b968-de0a8b86182a)
+![lambda_trigger](https://github.com/bnaikwad88/Automatic-Data-Collection-Storage-Lambda/assets/116859424/7b3c1e41-1933-4493-929b-379aa9e10e6d)
+
+
