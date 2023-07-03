@@ -25,3 +25,53 @@ The result of the above approach would be an AWS Lambda function that is continu
 - Monitoring the server's availability using a CloudWatch Alarm.
 - Sending a notification to a Slack channel if the server becomes unavailable.
 The function will continue to run and perform these tasks until it is stopped or modified. The Amazon RDS database will contain the data fetched from the API, and the CloudWatch Alarm will be triggered if the server becomes unavailable. The Slack notification will alert users that the server is unavailable, and provide details on the status of the server. The function and the database can be monitored to ensure that they are running and storing data correctly.
+
+```python
+import json
+import requests
+import psycopg2
+
+def lambda_handler(event, context):
+    conn = psycopg2.connect(
+        host="Your RDS database endpoint",
+        user="databse username",
+        password="your password"
+    )
+    cursor = conn.cursor()
+
+    cursor.execute('''CREATE TABLE IF NOT EXISTS iss_position
+                      (id SERIAL PRIMARY KEY,
+                       timestamp INTEGER,
+                       latitude FLOAT,
+                       longitude FLOAT)''')
+
+    try:
+        url = "http://api.open-notify.org/iss-now.json"
+        response = requests.get(url)
+        result = json.loads(response.text)
+        timestamp = int(result['timestamp'])
+        latitude = float(result['iss_position']['latitude'])
+        longitude = float(result['iss_position']['longitude'])
+
+        cursor.execute("INSERT INTO iss_position (timestamp, latitude, longitude) VALUES (%s, %s, %s)",
+                       (timestamp, latitude, longitude))
+        conn.commit()
+    except Exception as e:
+        # Handle any exceptions that occur during the execution
+        print("An error occurred:", str(e))
+        cursor.close()
+        conn.close()
+        return {
+            'statusCode': 500,
+            'body': 'An error occurred'
+        }
+        
+    cursor.close()
+    conn.close()
+
+    return {
+        'statusCode': 200,
+        'body': 'Data inserted successfully'
+    }
+
+```
