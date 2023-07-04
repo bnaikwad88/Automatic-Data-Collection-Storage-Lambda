@@ -99,4 +99,4 @@ def lambda_handler(event, context):
 ### The alarm stopped after starting the RDS.
 ![cloudwatch_alarm_resolved](https://github.com/bnaikwad88/Automatic-Data-Collection-Storage-Lambda/assets/116859424/e043f262-6c26-4ced-a26e-63647ac622b0)
 
-
+# NOTE: Make sure to import packages required for lambda_function are installed in the same Environment on which lambda function is configured.
